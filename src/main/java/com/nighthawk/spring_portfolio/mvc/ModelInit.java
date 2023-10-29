@@ -8,17 +8,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.nighthawk.spring_portfolio.mvc.jokes.Jokes;
 import com.nighthawk.spring_portfolio.mvc.jokes.JokesJpaRepository;
+import com.nighthawk.spring_portfolio.mvc.leaderboard.Leaderboard;
+import com.nighthawk.spring_portfolio.mvc.leaderboard.LeaderboardJpaRepository;
 import com.nighthawk.spring_portfolio.mvc.note.Note;
 import com.nighthawk.spring_portfolio.mvc.note.NoteJpaRepository;
 import com.nighthawk.spring_portfolio.mvc.person.Person;
 import com.nighthawk.spring_portfolio.mvc.person.PersonDetailsService;
+import com.nighthawk.spring_portfolio.mvc.spacebook.Spacebook;
+import com.nighthawk.spring_portfolio.mvc.spacebook.SpacebookJpaRepository;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Component
 @Configuration // Scans Application for ModelInit Bean, this detects CommandLineRunner
 public class ModelInit {  
     @Autowired JokesJpaRepository jokesRepo;
+    @Autowired LeaderboardJpaRepository leaderboardRepo;
+    @Autowired SpacebookJpaRepository spacebookRepo;
     @Autowired NoteJpaRepository noteRepo;
     @Autowired PersonDetailsService personService;
 
@@ -48,6 +55,22 @@ public class ModelInit {
                     noteRepo.save(n);  // JPA Save                  
                 }
             }
+            
+            HashMap<String, Integer> leaderboardHash = Leaderboard.init();
+            for (String leaderboard : leaderboardHash.keySet()) {
+                List<Leaderboard> leaderboardFound = leaderboardRepo.findByLeaderboardIgnoreCase(leaderboard);  // JPA lookup
+                if (leaderboardFound.size() == 0)
+                    leaderboardRepo.save(new Leaderboard(null, leaderboard, leaderboardHash.get(leaderboard))); //JPA save
+            }
+
+            HashMap<String, Integer> spacebookHash = Spacebook.init();
+            for (String spacebook : spacebookHash.keySet()) {
+                List<Spacebook> spacebookFound = spacebookRepo.findBySpacebookIgnoreCase(spacebook);  // JPA lookup
+                if (spacebookFound.size() == 0) {
+                    spacebookRepo.save(new Spacebook(null, spacebook, 0, 0));                 
+                }
+            }
+
 
         };
     }

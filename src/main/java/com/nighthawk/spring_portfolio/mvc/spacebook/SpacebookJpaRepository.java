@@ -20,5 +20,5 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SpacebookJpaRepository extends JpaRepository<Spacebook, Long>{
-    Optional<Spacebook> findByUsername(String username);
+    Optional<Spacebook> findById(Long id);
 }

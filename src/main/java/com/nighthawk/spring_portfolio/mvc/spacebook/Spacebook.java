@@ -1,4 +1,4 @@
-package com.nighthawk.spring_portfolio.mvc.profile;
+package com.nighthawk.spring_portfolio.mvc.spacebook;
 
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -28,15 +28,15 @@ public class Spacebook {
     private String imageEncoder;
 
     @Column
-    private int likes; // track the number of likes
+    private int like; // track the number of likes
 
     @Column
-    private int dislikes; // track the number of dislikes
+    private int dislike; // track the number of dislikes
 
     public Spacebook(String username, String imageEncoder) {
         this.username = username;
         this.imageEncoder = imageEncoder;
-        this.likes = 0; // initialize likes to 0
-        this.dislikes = 0; // initialize dislikes to 0
+        this.like = 0; // initialize likes to 0
+        this.dislike = 0; // initialize dislikes to 0
     }
 }

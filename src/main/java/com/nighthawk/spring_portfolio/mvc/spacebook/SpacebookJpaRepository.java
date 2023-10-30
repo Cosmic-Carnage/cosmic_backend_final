@@ -13,3 +13,12 @@
 //     List<Spacebook> findAllByOrderBySpacebookAsc();
 //     List<Spacebook> findBySpacebookIgnoreCase(String spacebook);
 // }
+
+package com.nighthawk.spring_portfolio.mvc.spacebook;
+import java.util.Optional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface SpacebookJpaRepository extends JpaRepository<Spacebook, Long>{
+    Optional<Spacebook> findByUsername(String username);
+}

@@ -11,7 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import jakarta.persistence.OneToOne;
-
+import javassist.Loader.Simple;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,25 +23,6 @@ import lombok.NoArgsConstructor;
 @Component
 @Configuration
 
-public class ModelInit {
-    @Autowired
-    private JokesJpaRepository jokesRepo;
-    @Autowired
-    private LeaderboardJpaRepository leaderboardRepo;
-    @Autowired
-    private SpacebookJpaRepository spacebookRepo;
-    @Autowired
-    private NoteJpaRepository noteRepo;
-    @Autowired
-    private PersonDetailsService personService;
-
-    @Bean
-    public CommandLineRunner run() {
-        return args -> {
-            // Your initialization logic here
-        };
-    }
-}
 
 @Entity
 public class Spacebook {
@@ -98,3 +79,25 @@ public class Spacebook {
         this.image = image;
     }
 }
+
+
+
+
+
+server {
+    server_name cosmic-backend.nighthawkcodingsociety.com ; # CHANGE SERVER NAME TO YOUR REGISTERED DOMAIN
+    location / {
+        proxy_pass http://localhost:8089; 
+        # Simple requests
+        # Preflighted requests
+
+        if ($request_method = OPTIONS ) {
+                add_header "Access-Control-Allow-Headers" "access-control-allow-origin, access-control-allow-credentials, Content-Type, Authorization, x-csrf-token";
+                add_header "Access-Control-Allow-Credentials"  "true";
+                add_header "Access-Control-Allow-Origin"  "*";
+                add_header "Access-Control-Allow-Methods" "GET, POST, PUT, DELETE, OPTIONS, HEAD";
+                add_header "Access-Control-Allow-MaxAge"  600;
+                return 200;
+        }
+
+    }

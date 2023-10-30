@@ -10,7 +10,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
-public class SpacebookApiController {
+public class SpacebookApiAppl {
     @Autowired
     private SpacebookJpaRepository spacebookRepo;
 

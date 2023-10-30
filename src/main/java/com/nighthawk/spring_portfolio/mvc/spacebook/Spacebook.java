@@ -1,39 +1,42 @@
-// package com.nighthawk.spring_portfolio.mvc.spacebook;
+package com.nighthawk.spring_portfolio.mvc.profile;
 
-// import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.context.annotation.Configuration;
-// import org.springframework.stereotype.Component;
+import java.time.LocalDateTime;
+import java.util.Date;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-// import jakarta.persistence.Column;
-// import jakarta.persistence.Entity;
-// import jakarta.persistence.GeneratedValue;
-// import jakarta.persistence.GenerationType;
-// import jakarta.persistence.Id;
-// import jakarta.persistence.Lob;
-// import jakarta.persistence.OneToOne;
-// import javassist.Loader.Simple;
-// import lombok.AllArgsConstructor;
-// import lombok.Data;
-// import lombok.NoArgsConstructor;
+@Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class Spacebook {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-// @Data
-// @NoArgsConstructor
-// @AllArgsConstructor
-// @Entity
-// @Component
-// @Configuration
+    @Column
+    private String username;
 
-// public class Spacebook {
-//     @Id
-//     @GeneratedValue(strategy = GenerationType.AUTO)
-//     private Long id;
+    @Column
+    private String imageEncoder;
 
-//     @Column(unique = true)
-//     private String spacebook;
+    @Column
+    private int likes; // track the number of likes
 
-//     private Integer like;
-//     private Integer dislike;
+    @Column
+    private int dislikes; // track the number of dislikes
 
-//     @Lob
-//     private byte[] image;
-// }
+    public Spacebook(String username, String imageEncoder) {
+        this.username = username;
+        this.imageEncoder = imageEncoder;
+        this.likes = 0; // initialize likes to 0
+        this.dislikes = 0; // initialize dislikes to 0
+    }
+}

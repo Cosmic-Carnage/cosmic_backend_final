@@ -65,16 +65,6 @@
 //                 if (leaderboardFound.size() == 0)
 //                     leaderboardRepo.save(new Leaderboard(null, leaderboard, leaderboardHash.get(leaderboard)));
 //             }
-
-//             HashMap<String, Integer> spacebookHash = Spacebook.init();
-//             for (String spacebook : spacebookHash.keySet()) {
-//                 List<Spacebook> spacebookFound = spacebookRepo.findBySpacebookIgnoreCase(spacebook);
-//                 if (spacebookFound.size() == 0) {
-//                     // Initialize the Spacebook entity with image data (assuming you have the image data in a byte array)
-//                     byte[] imageBytes = {}; // Replace this with your image data
-//                     spacebookRepo.save(new Spacebook(null, spacebook, 0, 0, imageBytes));
-//                 }
-//             }
 //         };
 //     }
 // }

@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class SpacebookApiController {
     @Autowired
-    private spacebookRepository spacebookRepo;
+    private SpacebookJpaRepository spacebookRepo;
 
     public void saveSpacebookToDB(MultipartFile file, String name, String description, int price) {
         Spacebook p = new Spacebook();

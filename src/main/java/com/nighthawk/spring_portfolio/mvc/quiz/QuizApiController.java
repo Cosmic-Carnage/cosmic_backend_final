@@ -1,58 +1,35 @@
 package com.nighthawk.spring_portfolio.mvc.quiz;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/quiz")
 public class QuizApiController {
-    private final QuizRepository quizRepository;
 
     @Autowired
-    public QuizApiController(QuizRepository quizRepository) {
-        this.quizRepository = quizRepository;
+    private QuizJpaRepository quizRepository;
+
+    @GetMapping("/")
+    public ResponseEntity<List<String>> getQuiz() {
+        List<String> questions = Quiz.init();
+        return new ResponseEntity<>(questions, HttpStatus.OK);
     }
 
-    // Get a list of all quiz questions
-    @GetMapping
-    public List<Quiz> getAllQuizQuestions() {
-        return quizRepository.findAll();
-    }
-
-    // Get a specific quiz question by ID
-    @GetMapping("/{id}")
-    public Quiz getQuizQuestionById(@PathVariable Long id) {
-        return quizRepository.findById(id).orElse(null);
-    }
-
-    // Create a new quiz question
-    @PostMapping
-    public Quiz createQuizQuestion(@RequestBody Quiz quiz) {
-        return quizRepository.save(quiz);
-    }
-
-    // Update an existing quiz question
-    @PutMapping("/{id}")
-    public Quiz updateQuizQuestion(@PathVariable Long id, @RequestBody Quiz updatedQuiz) {
-        return quizRepository.findById(id)
-                .map(quiz -> {
-                    quiz.setQuestion(updatedQuiz.getQuestion());
-                    quiz.setCorrectAnswer(updatedQuiz.getCorrectAnswer());
-                    quiz.setAnswerA(updatedQuiz.getAnswerA());
-                    quiz.setAnswerB(updatedQuiz.getAnswerB());
-                    quiz.setAnswerC(updatedQuiz.getAnswerC());
-                    quiz.setAnswerD(updatedQuiz.getAnswerD());
-                    quiz.setPoints(updatedQuiz.getPoints());
-                    return quizRepository.save(quiz);
-                })
-                .orElse(null);
-    }
-
-    // Delete a quiz question by ID
-    @DeleteMapping("/{id}")
-    public void deleteQuizQuestion(@PathVariable Long id) {
-        quizRepository.deleteById(id);
+    @PostMapping("/updateScore/{id}/{points}")
+    public ResponseEntity<Quiz> addScore(@PathVariable long id) {
+        Optional<Quiz> optional = quizRepository.findById(id);
+        if (optional.isPresent()) {
+            Quiz quiz = optional.get();
+            quiz.setPoints(quiz.getPoints() + 10);
+            quizRepository.save(quiz);
+            return new ResponseEntity<>(quiz, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 }

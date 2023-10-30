@@ -12,20 +12,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class Spacebook {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column
-    private String username;
+    private String image;
 
-    @Column
-    private String imageEncoder;
 
     @Column
     private int like; // track the number of likes
@@ -33,10 +27,7 @@ public class Spacebook {
     @Column
     private int dislike; // track the number of dislikes
 
-    public Spacebook(String username, String imageEncoder) {
-        this.username = username;
-        this.imageEncoder = imageEncoder;
-        this.like = 0; // initialize likes to 0
-        this.dislike = 0; // initialize dislikes to 0
+    public String toString() {
+        return "Product [id=" + id + ", image=" + image + "]";
     }
 }

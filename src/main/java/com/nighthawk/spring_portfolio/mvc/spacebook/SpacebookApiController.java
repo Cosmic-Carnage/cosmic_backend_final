@@ -36,7 +36,7 @@ public class SpacebookApiController {
     @GetMapping("/listProducts.html")
 	public String showExampleView(Model model)
 	{
-		List<Spacebook> products = spacebookApiAppl.getAllProduct();
+		List<Spacebook> products = spacebookApiAppl.getAllSpacebook();
 		model.addAttribute("products", products);
 		return "/listProducts.html";
 	}
@@ -53,7 +53,7 @@ public class SpacebookApiController {
     		@RequestParam("price") int price,
     		@RequestParam("desc") String desc)
     {
-    	spacebookApiAppl.saveProductToDB(file, name, desc, price);
+    	spacebookApiAppl.saveSpacebookToDB(file, name, desc, price);
     	return "redirect:/listProducts.html";
     }
     
@@ -61,7 +61,7 @@ public class SpacebookApiController {
     public String deleteProduct(@PathVariable("id") Long id)
     {
     	
-    	spacebookApiAppl.deleteProductById(id);
+    	spacebookApiAppl.deleteSpacebookById(id);
     	return "redirect:/listProducts.html";
     }
 

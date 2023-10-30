@@ -21,58 +21,60 @@ import java.util.HashMap;
 import java.util.List;
 
 @Component
-@Configuration // Scans Application for ModelInit Bean, this detects CommandLineRunner
-public class ModelInit {  
-    @Autowired JokesJpaRepository jokesRepo;
-    @Autowired LeaderboardJpaRepository leaderboardRepo;
-    @Autowired SpacebookJpaRepository spacebookRepo;
-    @Autowired NoteJpaRepository noteRepo;
-    @Autowired PersonDetailsService personService;
+@Configuration
+public class ModelInit {
+    @Autowired
+    JokesJpaRepository jokesRepo;
+    @Autowired
+    LeaderboardJpaRepository leaderboardRepo;
+    @Autowired
+    SpacebookJpaRepository spacebookRepo;
+    @Autowired
+    NoteJpaRepository noteRepo;
+    @Autowired
+    PersonDetailsService personService;
 
     @Bean
-    CommandLineRunner run() {  // The run() method will be executed after the application starts
+    CommandLineRunner run() {
         return args -> {
-
             // Joke database is populated with starting jokes
             String[] jokesArray = Jokes.init();
             for (String joke : jokesArray) {
-                List<Jokes> jokeFound = jokesRepo.findByJokeIgnoreCase(joke);  // JPA lookup
+                List<Jokes> jokeFound = jokesRepo.findByJokeIgnoreCase(joke);
                 if (jokeFound.size() == 0)
-                    jokesRepo.save(new Jokes(null, joke, 0, 0)); //JPA save
+                    jokesRepo.save(new Jokes(null, joke, 0, 0));
             }
 
             // Person database is populated with test data
             Person[] personArray = Person.init();
             for (Person person : personArray) {
-                //findByNameContainingIgnoreCaseOrEmailContainingIgnoreCase
-                List<Person> personFound = personService.list(person.getName(), person.getEmail());  // lookup
+                List<Person> personFound = personService.list(person.getName(), person.getEmail());
                 if (personFound.size() == 0) {
-                    personService.save(person);  // save
+                    personService.save(person);
 
                     // Each "test person" starts with a "test note"
                     String text = "Test " + person.getEmail();
-                    Note n = new Note(text, person);  // constructor uses new person as Many-to-One association
-                    noteRepo.save(n);  // JPA Save                  
+                    Note n = new Note(text, person);
+                    noteRepo.save(n);
                 }
             }
-            
+
             HashMap<String, Integer> leaderboardHash = Leaderboard.init();
             for (String leaderboard : leaderboardHash.keySet()) {
-                List<Leaderboard> leaderboardFound = leaderboardRepo.findByLeaderboardIgnoreCase(leaderboard);  // JPA lookup
+                List<Leaderboard> leaderboardFound = leaderboardRepo.findByLeaderboardIgnoreCase(leaderboard);
                 if (leaderboardFound.size() == 0)
-                    leaderboardRepo.save(new Leaderboard(null, leaderboard, leaderboardHash.get(leaderboard))); //JPA save
+                    leaderboardRepo.save(new Leaderboard(null, leaderboard, leaderboardHash.get(leaderboard)));
             }
 
             HashMap<String, Integer> spacebookHash = Spacebook.init();
             for (String spacebook : spacebookHash.keySet()) {
-                List<Spacebook> spacebookFound = spacebookRepo.findBySpacebookIgnoreCase(spacebook);  // JPA lookup
+                List<Spacebook> spacebookFound = spacebookRepo.findBySpacebookIgnoreCase(spacebook);
                 if (spacebookFound.size() == 0) {
-                    spacebookRepo.save(new Spacebook(null, spacebook, 0, 0));                 
+                    // Initialize the Spacebook entity with image data (assuming you have the image data in a byte array)
+                    byte[] imageBytes = {}; // Replace this with your image data
+                    spacebookRepo.save(new Spacebook(null, spacebook, 0, 0, imageBytes));
                 }
             }
-
-
         };
     }
 }
-

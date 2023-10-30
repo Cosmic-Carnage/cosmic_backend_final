@@ -52,12 +52,12 @@ public class Quiz {
         questionList.add(quiz2);
 
         Quiz quiz3 = new Quiz();
-        quiz3.setQuestion("What is the largest moon of Jupiter?");
-        quiz3.setCorrectAnswer('c');
-        quiz3.setAnswerA("Europa");
-        quiz3.setAnswerB("Amalthea");
-        quiz3.setAnswerC("Ganymede");
-        quiz3.setAnswerD("Io");
+        quiz3.setQuestion("Wnat planet is the Great Red Spot on?");
+        quiz3.setCorrectAnswer('b');
+        quiz3.setAnswerA("Earth");
+        quiz3.setAnswerB("Jupyter");
+        quiz3.setAnswerC("Mars");
+        quiz3.setAnswerD("Neptune");
         quiz3.setPoints(10);
         questionList.add(quiz3);
 
@@ -72,12 +72,12 @@ public class Quiz {
         questionList.add(quiz4);
 
         Quiz quiz5 = new Quiz();
-        quiz5.setQuestion("What is the largest moon of Jupiter?");
-        quiz5.setCorrectAnswer('c');
-        quiz5.setAnswerA("Europa");
-        quiz5.setAnswerB("Amalthea");
-        quiz5.setAnswerC("Ganymede");
-        quiz5.setAnswerD("Io");
+        quiz5.setQuestion("Who was the first human to walk on the Moon?");
+        quiz5.setCorrectAnswer('d');
+        quiz5.setAnswerA("Alan Shepard");
+        quiz5.setAnswerB("John Glenn");
+        quiz5.setAnswerC("Yuri Gagarin");
+        quiz5.setAnswerD("Neil Armstrong");
         quiz5.setPoints(10);
         questionList.add(quiz5);
 

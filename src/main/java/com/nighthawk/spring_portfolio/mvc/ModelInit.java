@@ -21,6 +21,7 @@ import com.nighthawk.spring_portfolio.mvc.quiz.QuizJpaRepository;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 @Configuration
@@ -37,6 +38,7 @@ public class ModelInit {
     PersonDetailsService personService;
     @Autowired
     QuizJpaRepository quizRepo;
+
 
     @Bean
     CommandLineRunner run() {
@@ -79,23 +81,6 @@ public class ModelInit {
                     quizRepo.save(newQuiz);
                 }
             }
-        //    HashMap<String, Integer> leaders = Quiz.init();
-
-        //    for (Map.Entry<String, Integer> entry : leaders.entrySet()) {
-        //        String leaderName = entry.getKey();
-        //        int leaderScore = entry.getValue();
-
-                // Check if the leader already exists in the leaderboard database
-        //        Leaderboard leaderboardEntry = (Leaderboard) leaderboardRepo.findByLeaderboardIgnoreCase(leaderName);
-
-        //        if (leaderboardEntry == null) {
-                    // If the leader doesn't exist, create a new leaderboard entry
-        //            Leaderboard newLeaderboardEntry = new Leaderboard();
-        //            newLeaderboardEntry.setLeaderName(leaderName);
-        //            newLeaderboardEntry.setScore(leaderScore);
-        //            leaderboardRepo.save(newLeaderboardEntry);
-        //        }
-        //    }
         };
     }
 }

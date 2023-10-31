@@ -17,37 +17,45 @@ public class Spacebook {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+   
+    public Long getId() {
+      return id;
+  }
+  public void setId(Long id) {
+      this.id = id;
+  }
 
-    private String image;
-    public String getImage() {
-		return image;
-	}
+  private byte[] image;
 
-    public void setImage(String image) {
-		this.image = image;
-	}
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
 
 
     @Column
-    private int like; // track the number of likes
-    public String getLike() {
-		return image;
-	}
-
-    public void setLike(String image) {
-		this.image = image;
-	}
-
+    private int like;
     @Column
     private int dislike; // track the number of dislikes
-    public String getDislike() {
-		return image;
-	}
 
-    public void setDislike(String image) {
-		this.image = image;
-	}
+    public int getLike() {
+        return like;
+    }
 
+    public void setLike(int like) {
+        this.like = like;
+    }
+
+    public int getDislike() {
+        return dislike;
+    }
+
+    public void setDislike(int dislike) {
+        this.dislike = dislike;
+    }
 
     public String toString() {
         return "Product [id=" + id + ", image=" + image + "]";

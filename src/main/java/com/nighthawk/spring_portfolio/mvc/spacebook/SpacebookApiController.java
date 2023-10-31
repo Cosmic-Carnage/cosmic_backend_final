@@ -60,7 +60,7 @@ public class SpacebookApiController {
         Optional<Spacebook> optional = spacebookRepo.findById(id);
         if (optional.isPresent()) {
             Spacebook spacebook = optional.get();
-            byte[] imageBytes = Base64.getDecoder().decode(spacebook.getImage());
+            byte[] imageBytes = spacebook.getImage();
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.IMAGE_JPEG); // Set the content type to image/jpeg or your file type
             return new ResponseEntity<>(imageBytes, headers, HttpStatus.OK);

@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/quiz")
@@ -19,28 +18,5 @@ public class QuizApiController {
     public ResponseEntity<List<String>> getQuiz() {
         List<String> questions = Quiz.init2();
         return new ResponseEntity<>(questions, HttpStatus.OK);
-    }
-
-    @PostMapping("/updateScore/{id}/{points}")
-    public ResponseEntity<Quiz> addScore(@PathVariable long id) {
-        Optional<Quiz> optional = quizRepository.findById(id);
-        if (optional.isPresent()) {
-            Quiz quiz = optional.get();
-            quiz.setPoints(quiz.getPoints() + 10);
-            quizRepository.save(quiz);
-            return new ResponseEntity<>(quiz, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-    }
-
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Quiz> deleteQuiz(@PathVariable long id) {
-        Optional<Quiz> optional = quizRepository.findById(id);
-        if (optional.isPresent()) {
-            Quiz quiz = optional.get();
-            quizRepository.deleteById(id);
-            return new ResponseEntity<>(quiz, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 }

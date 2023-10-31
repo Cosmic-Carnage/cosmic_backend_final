@@ -18,6 +18,8 @@ import com.nighthawk.spring_portfolio.mvc.spacebook.Spacebook;
 import com.nighthawk.spring_portfolio.mvc.spacebook.SpacebookJpaRepository;
 import com.nighthawk.spring_portfolio.mvc.quiz.Quiz;
 import com.nighthawk.spring_portfolio.mvc.quiz.QuizJpaRepository;
+import com.nighthawk.spring_portfolio.mvc.quizleaderboard.QuizLeaderboard;
+import com.nighthawk.spring_portfolio.mvc.quizleaderboard.QuizLeaderboardJpaRepository;
 
 import java.util.HashMap;
 import java.util.List;
@@ -38,6 +40,8 @@ public class ModelInit {
     PersonDetailsService personService;
     @Autowired
     QuizJpaRepository quizRepo;
+    @Autowired
+    QuizLeaderboardJpaRepository quizLeadersRepo;
 
 
     @Bean
@@ -79,6 +83,14 @@ public class ModelInit {
                     Quiz newQuiz = new Quiz();
                     newQuiz.setQuestion(question);
                     quizRepo.save(newQuiz);
+                }
+            }
+
+            HashMap<String, Integer> leaders = QuizLeaderboard.init();
+            for (String leader : leaders.keySet()) {
+                List<QuizLeaderboard> leadersFound = quizLeadersRepo.findByLeadersIgnoreCase(leader);
+                if (leadersFound.size() == 0) {
+                    quizLeadersRepo.save(new QuizLeaderboard(null, leader, leaders.get(leader)));
                 }
             }
         };

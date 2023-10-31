@@ -27,26 +27,27 @@ public class Spacebook {
 		this.image = image;
 	}
 
-
     @Column
-    private int like; // track the number of likes
-    public String getLike() {
-		return image;
-	}
-
-    public void setLike(String image) {
-		this.image = image;
-	}
-
+    private int like;
     @Column
     private int dislike; // track the number of dislikes
-    public String getDislike() {
-		return image;
-	}
+    
+    public int getLike() {
+        return like;
+    }
 
-    public void setDislike(String image) {
-		this.image = image;
-	}
+    public void setLike(int like) {
+        this.like = like;
+    }
+
+    public int getDislike() {
+        return dislike;
+    }
+
+    public void setDislike(int dislike) {
+        this.dislike = dislike;
+    }
+
 
 
     public String toString() {

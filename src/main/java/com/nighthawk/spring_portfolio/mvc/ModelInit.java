@@ -21,6 +21,7 @@ import com.nighthawk.spring_portfolio.mvc.quiz.QuizJpaRepository;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 @Configuration
@@ -37,6 +38,7 @@ public class ModelInit {
     PersonDetailsService personService;
     @Autowired
     QuizJpaRepository quizRepo;
+
 
     @Bean
     CommandLineRunner run() {
@@ -79,6 +81,7 @@ public class ModelInit {
                     quizRepo.save(newQuiz);
                 }
             }
+
         };
     }
 }

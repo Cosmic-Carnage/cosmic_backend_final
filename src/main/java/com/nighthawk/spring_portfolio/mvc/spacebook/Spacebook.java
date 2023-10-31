@@ -21,15 +21,20 @@ public class Spacebook {
     public Long getId() {
       return id;
   }
+  public void setId(Long id) {
+      this.id = id;
+  }
 
-    private String image;
-    public String getImage() {
-		return image;
-	}
+  private byte[] image;
 
-    public void setImage(String image) {
-		this.image = image;
-	}
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
 
     @Column
     private int like;

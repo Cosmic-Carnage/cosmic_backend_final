@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.io.File;
-
 import com.nighthawk.spring_portfolio.mvc.spacebook.SpacebookApiAppl;
 
 
@@ -36,6 +35,25 @@ public class SpacebookApiController {
         return new ResponseEntity<>(spacebookRepo.findAll(), HttpStatus.OK);
     }
 
+    @PostMapping("/upload")
+    public ResponseEntity<String> saveSpacebookToDB(@RequestParam("file") String file) {
+        if (file.isEmpty()) {
+            return new ResponseEntity<>("Please select a file to upload.", HttpStatus.BAD_REQUEST);
+        }
+
+        try {
+            byte[] imageBytes = Base64.getDecoder().decode(file);
+            Spacebook spacebook = new Spacebook();
+            spacebook.setImage(imageBytes);
+
+            Spacebook savedSpacebook = spacebookRepo.save(spacebook);
+
+            return new ResponseEntity<>("Image uploaded successfully. Spacebook ID: " + savedSpacebook.getId(), HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>("Upload failed.", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<byte[]> serveImage(@PathVariable("id") Long id) {

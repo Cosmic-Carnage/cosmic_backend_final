@@ -31,6 +31,12 @@ public class SpacebookApiController {
     @Autowired
     private SpacebookApiAppl spacebookApiAppl;
 
+    @GetMapping("/")
+    public ResponseEntity<List<Spacebook>> getSpacebook() {
+        return new ResponseEntity<>(spacebookRepo.findAll(), HttpStatus.OK);
+    }
+
+
     @GetMapping("/{id}")
     public ResponseEntity<byte[]> serveImage(@PathVariable("id") Long id) {
         Optional<Spacebook> optional = spacebookRepo.findById(id);

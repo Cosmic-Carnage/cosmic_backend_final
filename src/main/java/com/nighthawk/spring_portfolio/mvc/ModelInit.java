@@ -70,7 +70,7 @@ public class ModelInit {
                     leaderboardRepo.save(new Leaderboard(null, leaderboard, leaderboardHash.get(leaderboard)));
             }
 
-            List<String> questionList = Quiz.init();
+            List<String> questionList = Quiz.init2();
             for (String question : questionList) {
                 List<Quiz> quizFound = quizRepo.findByQuestionIgnoreCase(question);
                 if (quizFound.size() == 0) {
@@ -79,6 +79,23 @@ public class ModelInit {
                     quizRepo.save(newQuiz);
                 }
             }
+        //    HashMap<String, Integer> leaders = Quiz.init();
+
+        //    for (Map.Entry<String, Integer> entry : leaders.entrySet()) {
+        //        String leaderName = entry.getKey();
+        //        int leaderScore = entry.getValue();
+
+                // Check if the leader already exists in the leaderboard database
+        //        Leaderboard leaderboardEntry = (Leaderboard) leaderboardRepo.findByLeaderboardIgnoreCase(leaderName);
+
+        //        if (leaderboardEntry == null) {
+                    // If the leader doesn't exist, create a new leaderboard entry
+        //            Leaderboard newLeaderboardEntry = new Leaderboard();
+        //            newLeaderboardEntry.setLeaderName(leaderName);
+        //            newLeaderboardEntry.setScore(leaderScore);
+        //            leaderboardRepo.save(newLeaderboardEntry);
+        //        }
+        //    }
         };
     }
 }

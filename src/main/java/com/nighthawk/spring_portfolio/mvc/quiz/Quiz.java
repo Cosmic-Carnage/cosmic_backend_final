@@ -28,7 +28,15 @@ public class Quiz {
 
     private int points;
 
-    public static List<String> init() {
+    public static HashMap<String, Integer> init() {
+        HashMap<String, Integer> leaders = new HashMap<>();
+        {
+            leaders.put("Tay", 20);
+        }
+        return leaders;
+    }
+
+    public static List<String> init2() {
         List<String> questionList = new ArrayList<>();
 
         questionList.add("What is the largest moon of Jupiter?");

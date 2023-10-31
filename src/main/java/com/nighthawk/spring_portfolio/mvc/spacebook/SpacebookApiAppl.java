@@ -17,7 +17,7 @@ public class SpacebookApiAppl {
     @Autowired
     private SpacebookJpaRepository spacebookRepo;
 
-    public void saveSpacebookToDB(MultipartFile file, String name, String description, int price) {
+    public String saveSpacebookToDB(MultipartFile file, String name, String description, int price) {
         Spacebook p = new Spacebook();
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         if (fileName.contains("..")) {
@@ -31,7 +31,8 @@ public class SpacebookApiAppl {
         }
 
         // Save the Spacebook entity to the database
-        spacebookRepo.save(p);
+        Spacebook savedSpacebook = spacebookRepo.save(p);
+        return "/api/spacebook/image/" + savedSpacebook.getId();
     }
 
     public List<Spacebook> getAllSpacebook() {

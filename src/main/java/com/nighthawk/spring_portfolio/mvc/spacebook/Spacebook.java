@@ -17,6 +17,10 @@ public class Spacebook {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+   
+    public Long getId() {
+      return id;
+  }
 
     private String image;
     public String getImage() {
@@ -31,7 +35,7 @@ public class Spacebook {
     private int like;
     @Column
     private int dislike; // track the number of dislikes
-    
+
     public int getLike() {
         return like;
     }
@@ -47,8 +51,6 @@ public class Spacebook {
     public void setDislike(int dislike) {
         this.dislike = dislike;
     }
-
-
 
     public String toString() {
         return "Product [id=" + id + ", image=" + image + "]";

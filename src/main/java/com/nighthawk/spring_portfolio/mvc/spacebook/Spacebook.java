@@ -30,4 +30,9 @@ public class Spacebook {
         this.fileName = fileName;
         this.imageEncoder = imageEncoder;
     }
+    
+    @Column
+    private int like;
+    @Column
+    private int dislike;
 }

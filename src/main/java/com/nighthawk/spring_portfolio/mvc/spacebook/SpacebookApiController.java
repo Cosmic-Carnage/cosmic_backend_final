@@ -16,8 +16,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.io.File;
-import com.nighthawk.spring_portfolio.mvc.spacebook.SpacebookApiAppl;
-
 
 
 @RestController
@@ -26,9 +24,6 @@ public class SpacebookApiController {
 
     @Autowired
     private SpacebookJpaRepository spacebookRepo;
-
-    @Autowired
-    private SpacebookApiAppl spacebookApiAppl;
 
     @GetMapping("/")
     public ResponseEntity<List<Spacebook>> getSpacebook() {

@@ -21,13 +21,8 @@ public class QuizLeaderboard {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-<<<<<<< HEAD
-    @Column(unique=false)
-    private String quizLeaderboard;
-=======
     // @Column(unique=true)
     private String leaders;
->>>>>>> 35a258472e979994b14c82ba7645208cd34ebbe2
 
     private int score;
 

@@ -47,6 +47,7 @@ public ResponseEntity<Object> postQuizLeaderboard(@RequestParam("username") Stri
                                                   @RequestParam("score") int score) {
         // A person object WITHOUT ID will create a new record with default roles as student
         QuizLeaderboard quizLeaderboard = new QuizLeaderboard(null, username, score);
-        return new ResponseEntity<>(" is created successfully", HttpStatus.CREATED);
+        QuizLeaderboard savedLeaderboard = repository.save(quizLeaderboard);
+        return new ResponseEntity<>(savedLeaderboard, HttpStatus.CREATED);
     }
 }

@@ -88,7 +88,7 @@ public class ModelInit {
 
             HashMap<String, Integer> leaders = QuizLeaderboard.init();
             for (String leader : leaders.keySet()) {
-                List<QuizLeaderboard> leadersFound = quizLeadersRepo.findByQuizLeaderboardIgnoreCase(leader);
+                List<QuizLeaderboard> leadersFound = quizLeadersRepo.findByLeadersIgnoreCase(leader);
                 if (leadersFound.size() == 0) {
                     quizLeadersRepo.save(new QuizLeaderboard(null, leader, leaders.get(leader)));
                 }

@@ -10,6 +10,6 @@ public interface QuizLeaderboardJpaRepository extends JpaRepository<QuizLeaderbo
     The below custom methods are prototyped for this application
     */
     void save(String QuizLeaderboard);
-    List<QuizLeaderboard> findAllByOrderByQuizLeaderboardAsc();
-    List<QuizLeaderboard> findByQuizLeaderboardIgnoreCase(String quizleaderboard);
+    List<QuizLeaderboard> findAllByOrderByLeadersAsc();
+    List<QuizLeaderboard> findByLeadersIgnoreCase(String quizleaderboard);
 }

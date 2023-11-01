@@ -26,9 +26,7 @@ public class Quiz {
     private String answerC;
     private String answerD;
 
-    private int points;
-
-    public static List<String> init() {
+    public static List<String> init2() {
         List<String> questionList = new ArrayList<>();
 
         questionList.add("What is the largest moon of Jupiter?");

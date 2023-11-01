@@ -9,7 +9,7 @@ public interface QuizLeaderboardJpaRepository extends JpaRepository<QuizLeaderbo
     /* JPA has many built in methods: https://www.tutorialspoint.com/spring_boot_jpa/spring_boot_jpa_repository_methods.htm
     The below custom methods are prototyped for this application
     */
-    void save(String leaders);
+    void save(String QuizLeaderboard);
     List<QuizLeaderboard> findAllByOrderByLeadersAsc();
-    List<QuizLeaderboard> findByLeadersIgnoreCase(String leaders);
+    List<QuizLeaderboard> findByLeadersIgnoreCase(String quizleaderboard);
 }

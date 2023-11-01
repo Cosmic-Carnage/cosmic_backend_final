@@ -1,4 +1,3 @@
-
 package com.nighthawk.spring_portfolio.mvc.spacebook;
 
 import java.io.IOException;
@@ -7,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -48,9 +48,18 @@ public class SpacebookApiController {
             Spacebook file = optional.get();
             String data = file.getImageEncoder();
             byte[] imageBytes = Base64.getDecoder().decode(data);
-            return ResponseEntity.status(HttpStatus.OK)
-                    .contentType(MediaType.valueOf("image/png"))
-                    .body(imageBytes);
+
+            // determine the type based on file extension
+            MediaType mediaType = MediaType.IMAGE_PNG; // default set to PNG
+            if (fileName.toLowerCase().endsWith(".jpg") || fileName.toLowerCase().endsWith(".jpeg")) {
+                mediaType = MediaType.IMAGE_JPEG;
+            } else if (fileName.toLowerCase().endsWith(".gif")) {
+                mediaType = MediaType.IMAGE_GIF;
+            } 
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(mediaType);
+
+            return new ResponseEntity<>(imageBytes, headers, HttpStatus.OK);
         } else {
             return ResponseEntity.notFound().build();
         }

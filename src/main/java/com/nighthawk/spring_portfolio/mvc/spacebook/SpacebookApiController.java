@@ -2,6 +2,7 @@ package com.nighthawk.spring_portfolio.mvc.spacebook;
 
 import java.io.IOException;
 import java.util.Base64;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,11 @@ public class SpacebookApiController {
 
     @Autowired
     ResourceLoader resourceLoader;
+
+    @GetMapping("/")
+    public ResponseEntity<List<Spacebook>> getSpacebook() {
+        return new ResponseEntity<>(uploadFileRepository.findAll(), HttpStatus.OK);
+    }
 
     @PostMapping
     public ResponseEntity<String> save(MultipartFile image, @RequestParam("fileName") String fileName) throws IOException {

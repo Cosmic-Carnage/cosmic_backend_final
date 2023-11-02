@@ -19,7 +19,6 @@ import com.nighthawk.spring_portfolio.mvc.quizleaderboard.QuizLeaderboardJpaRepo
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 
 @Component
 @Configuration

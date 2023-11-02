@@ -29,10 +29,6 @@ public class QuizLeaderboard {
     // starting scores
     public static HashMap<String, Integer> init() {
         HashMap<String, Integer> quizleaders = new HashMap<>();
-        {
-            quizleaders.put("Tay", 40);
-            
-        }
         return quizleaders;
     }
 }

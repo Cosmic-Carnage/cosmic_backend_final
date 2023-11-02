@@ -62,20 +62,19 @@ public class SecurityConfig {
 	public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
 		return authenticationConfiguration.getAuthenticationManager();
 	}
-	// @Bean
-    // public CorsFilter corsFilter() {
-    //     CorsConfiguration config = new CorsConfiguration();
-    //     config.setAllowCredentials(true);
-    //     config.addAllowedOrigin("*"); // Replace with your frontend URL
-    //     config.addAllowedHeader("*");
-    //     config.addAllowedMethod("GET");
-    //     // Add other configuration options as needed
+	@Bean
+    public CorsFilter corsFilter() {
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowCredentials(true);
+        config.addAllowedOrigin("*");
+        config.addAllowedHeader("*");
+        config.addAllowedMethod("GET");
 
-    //     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-    //     source.registerCorsConfiguration("/**", config);
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", config);
 
-    //     return new CorsFilter(source);
-    // }
+        return new CorsFilter(source);
+    }
 	
     // Provide security configuration
 		@Bean

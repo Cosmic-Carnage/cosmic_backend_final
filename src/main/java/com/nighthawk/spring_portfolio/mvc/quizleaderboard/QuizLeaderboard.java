@@ -2,7 +2,6 @@ package com.nighthawk.spring_portfolio.mvc.quizleaderboard;
 
 import java.util.HashMap;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

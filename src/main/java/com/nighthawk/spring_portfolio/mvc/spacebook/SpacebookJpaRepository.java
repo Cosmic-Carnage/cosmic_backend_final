@@ -6,4 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SpacebookJpaRepository extends JpaRepository<Spacebook, Long> {
     Optional<Spacebook> findByfileName(String fileName);
+
+    void deleteByfileName(String fileName);
 }

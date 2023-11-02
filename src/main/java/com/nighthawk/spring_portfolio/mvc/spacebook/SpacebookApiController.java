@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -72,9 +73,9 @@ public class SpacebookApiController {
         }
     }
 
-    @PostMapping("/like/{id}")
-    public ResponseEntity<Spacebook> setUpVote(@PathVariable long id) {
-        Optional<Spacebook> optional = uploadFileRepository.findById(id);
+    @PostMapping("/like/{fileName}")
+    public ResponseEntity<Spacebook> setUpVote(@PathVariable String fileName) {
+        Optional<Spacebook> optional = uploadFileRepository.findByfileName(fileName);
         if (optional.isPresent()) { 
             Spacebook spacebook = optional.get(); 
             spacebook.setLike(spacebook.getLike()+1);
@@ -83,9 +84,9 @@ public class SpacebookApiController {
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST); 
     }
-    @PostMapping("/dislike/{id}")
-    public ResponseEntity<Spacebook> setDownVote(@PathVariable long id) {
-        Optional<Spacebook> optional = uploadFileRepository.findById(id);
+    @PostMapping("/dislike/{fileName}")
+    public ResponseEntity<Spacebook> setDownVote(@PathVariable String fileName) {
+        Optional<Spacebook> optional = uploadFileRepository.findByfileName(fileName);
         if (optional.isPresent()) { 
             Spacebook spacebook = optional.get();
             spacebook.setDislike(spacebook.getDislike()+1);
@@ -95,13 +96,14 @@ public class SpacebookApiController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Spacebook> deleteSpacebook(@PathVariable long id) {
-        Optional<Spacebook> optional = uploadFileRepository.findById(id);
+    @Transactional
+    @DeleteMapping("/delete/{fileName}")
+    public ResponseEntity<String> deleteSpacebook(@PathVariable String fileName) {
+        Optional<Spacebook> optional = uploadFileRepository.findByfileName(fileName);
         if (optional.isPresent()) {
             Spacebook spacebook = optional.get();
-            uploadFileRepository.deleteById(id);
-            return new ResponseEntity<>(spacebook, HttpStatus.OK);
+            uploadFileRepository.deleteByfileName(fileName);
+            return new ResponseEntity<String>("Image has been deleted", HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }

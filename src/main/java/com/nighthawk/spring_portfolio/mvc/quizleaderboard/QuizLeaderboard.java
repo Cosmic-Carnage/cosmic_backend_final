@@ -2,7 +2,6 @@ package com.nighthawk.spring_portfolio.mvc.quizleaderboard;
 
 import java.util.HashMap;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,10 +28,6 @@ public class QuizLeaderboard {
     // starting scores
     public static HashMap<String, Integer> init() {
         HashMap<String, Integer> quizleaders = new HashMap<>();
-        {
-            quizleaders.put("Tay", 40);
-            
-        }
         return quizleaders;
     }
 }

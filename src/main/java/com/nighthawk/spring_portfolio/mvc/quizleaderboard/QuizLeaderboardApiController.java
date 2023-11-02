@@ -42,12 +42,11 @@ public class QuizLeaderboardApiController {
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
-    @PostMapping( "/post")
-public ResponseEntity<Object> postQuizLeaderboard(@RequestParam("leaders") String leaders,
-                                                  @RequestParam("score") int score) {
+    @PostMapping("/post/{leaders}/{score}")
+    public ResponseEntity<QuizLeaderboard> postQuizLeaderboard(@PathVariable String leaders, @PathVariable int score) {
         // A person object WITHOUT ID will create a new record with default roles as student
         QuizLeaderboard quizLeaderboard = new QuizLeaderboard(null, leaders, score);
-        QuizLeaderboard savedLeaderboard = repository.save(quizLeaderboard);
-        return new ResponseEntity<>(savedLeaderboard, HttpStatus.CREATED);
+        repository.save(quizLeaderboard);
+        return new ResponseEntity<>(quizLeaderboard, HttpStatus.OK);
     }
 }

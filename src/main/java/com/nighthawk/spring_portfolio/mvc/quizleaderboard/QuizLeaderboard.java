@@ -26,6 +26,7 @@ public class QuizLeaderboard {
     private int score;
 
     // starting scores
+
     public static HashMap<String, Integer> init() {
         HashMap<String, Integer> quizleaders = new HashMap<>();
         return quizleaders;

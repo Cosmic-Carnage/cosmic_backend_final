@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.List;
 import java.util.Optional;
 
@@ -41,5 +42,13 @@ public class LeaderboardApiController {
             return new ResponseEntity<>(leaderboard, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @PostMapping("/post/{leaderboard}/{score}")
+    public ResponseEntity<Leaderboard> postLeaderboard(@PathVariable String leaderboard, @PathVariable int score) {
+        // A person object WITHOUT ID will create a new record with default roles as student
+        Leaderboard leaderboardrepo = new Leaderboard(null, leaderboard, score);
+        repository.save(leaderboardrepo);
+        return new ResponseEntity<>(leaderboardrepo, HttpStatus.OK);
     }
 }

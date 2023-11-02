@@ -10,6 +10,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/quizleaders")
+@CrossOrigin(origins="https://cosmic-carnage.github.io/")
 public class QuizLeaderboardApiController {
 
     @Autowired

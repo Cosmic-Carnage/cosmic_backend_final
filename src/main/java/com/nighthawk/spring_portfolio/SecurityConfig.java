@@ -44,7 +44,6 @@ public class SecurityConfig {
 	@Bean
     public CorsFilter corsFilter() {
         CorsConfiguration config = new CorsConfiguration();
-		config.setAllowCredentials(true);
         config.addAllowedOrigin("*");
         config.addAllowedHeader("*");
         config.addAllowedMethod("GET");

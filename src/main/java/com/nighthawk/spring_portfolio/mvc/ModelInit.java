@@ -14,7 +14,6 @@ import com.nighthawk.spring_portfolio.mvc.note.Note;
 import com.nighthawk.spring_portfolio.mvc.note.NoteJpaRepository;
 import com.nighthawk.spring_portfolio.mvc.person.Person;
 import com.nighthawk.spring_portfolio.mvc.person.PersonDetailsService;
-import com.nighthawk.spring_portfolio.mvc.spacebook.Spacebook;
 import com.nighthawk.spring_portfolio.mvc.spacebook.SpacebookJpaRepository;
 import com.nighthawk.spring_portfolio.mvc.quiz.Quiz;
 import com.nighthawk.spring_portfolio.mvc.quiz.QuizJpaRepository;
@@ -23,7 +22,6 @@ import com.nighthawk.spring_portfolio.mvc.quizleaderboard.QuizLeaderboardJpaRepo
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 
 @Component
 @Configuration

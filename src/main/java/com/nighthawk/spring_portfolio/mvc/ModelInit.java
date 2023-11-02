@@ -10,10 +10,7 @@ import com.nighthawk.spring_portfolio.mvc.jokes.Jokes;
 import com.nighthawk.spring_portfolio.mvc.jokes.JokesJpaRepository;
 import com.nighthawk.spring_portfolio.mvc.leaderboard.Leaderboard;
 import com.nighthawk.spring_portfolio.mvc.leaderboard.LeaderboardJpaRepository;
-import com.nighthawk.spring_portfolio.mvc.note.Note;
-import com.nighthawk.spring_portfolio.mvc.note.NoteJpaRepository;
-import com.nighthawk.spring_portfolio.mvc.person.Person;
-import com.nighthawk.spring_portfolio.mvc.person.PersonDetailsService;
+import com.nighthawk.spring_portfolio.mvc.spacebook.Spacebook;
 import com.nighthawk.spring_portfolio.mvc.spacebook.SpacebookJpaRepository;
 import com.nighthawk.spring_portfolio.mvc.quiz.Quiz;
 import com.nighthawk.spring_portfolio.mvc.quiz.QuizJpaRepository;
@@ -33,10 +30,6 @@ public class ModelInit {
     @Autowired
     SpacebookJpaRepository spacebookRepo;
     @Autowired
-    NoteJpaRepository noteRepo;
-    @Autowired
-    PersonDetailsService personService;
-    @Autowired
     QuizJpaRepository quizRepo;
     @Autowired
     QuizLeaderboardJpaRepository quizLeadersRepo;
@@ -51,20 +44,6 @@ public class ModelInit {
                 List<Jokes> jokeFound = jokesRepo.findByJokeIgnoreCase(joke);
                 if (jokeFound.size() == 0)
                     jokesRepo.save(new Jokes(null, joke, 0, 0));
-            }
-
-            //Person database is populated with test data
-            Person[] personArray = Person.init();
-            for (Person person : personArray) {
-                List<Person> personFound = personService.list(person.getName(), person.getEmail());
-                if (personFound.size() == 0) {
-                    personService.save(person);
-
-                    //Each "test person" starts with a "test note"
-                    String text = "Test " + person.getEmail();
-                    Note n = new Note(text, person);
-                    noteRepo.save(n);
-                }
             }
 
             HashMap<String, Integer> leaderboardHash = Leaderboard.init();

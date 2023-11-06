@@ -29,18 +29,6 @@ public class Leaderboard {
     // starting scores
     public static HashMap<String, Integer> init() {
         HashMap<String, Integer> leaderboardHash = new HashMap<>();
-        {
-            leaderboardHash.put("Player1", 1000);
-            leaderboardHash.put("Player2", 800);
-            leaderboardHash.put("Player3", 1200);
-            leaderboardHash.put("Player4", 4000);
-            leaderboardHash.put("Player5", 670);
-            leaderboardHash.put("Player6", 320);
-            leaderboardHash.put("Player7", 570);
-            leaderboardHash.put("Player8", 129);
-            leaderboardHash.put("Player9", 250);
-            leaderboardHash.put("Player10", 875);
-        }
         return leaderboardHash;
     }
 }

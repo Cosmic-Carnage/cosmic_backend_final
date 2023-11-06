@@ -41,23 +41,27 @@ public class SpacebookApiController {
         return new ResponseEntity<>(uploadFileRepository.findAll(), HttpStatus.OK);
     }
 
+    // handle http post request for saving an image
     @PostMapping
     public ResponseEntity<String> save(MultipartFile image, @RequestParam("fileName") String fileName) throws IOException {
+        // encode the contents of the uploaded image file as a Base64-encoded string
         String encodedString = Base64.getEncoder().encodeToString(image.getBytes());
         Spacebook file = new Spacebook(fileName, encodedString);
         uploadFileRepository.save(file);
         return new ResponseEntity<>("Image has been uploaded", HttpStatus.CREATED);
     }
 
+    // handle http get request for downloading an image by its filename
     @GetMapping("/{fileName}")
     public ResponseEntity<byte[]> downloadImage(@PathVariable String fileName) {
+        // check if the image with the given filename exists in the repository
         Optional<Spacebook> optional = uploadFileRepository.findByfileName(fileName);
         if (optional.isPresent()) {
             Spacebook file = optional.get();
             String data = file.getImageEncoder();
             byte[] imageBytes = Base64.getDecoder().decode(data);
 
-            // determine the type based on file extension
+            // determine the MediaType based on the file extension
             MediaType mediaType = MediaType.IMAGE_PNG; // default set to PNG
             if (fileName.toLowerCase().endsWith(".jpg") || fileName.toLowerCase().endsWith(".jpeg")) {
                 mediaType = MediaType.IMAGE_JPEG;

@@ -10,7 +10,6 @@ import com.nighthawk.spring_portfolio.mvc.jokes.Jokes;
 import com.nighthawk.spring_portfolio.mvc.jokes.JokesJpaRepository;
 import com.nighthawk.spring_portfolio.mvc.leaderboard.Leaderboard;
 import com.nighthawk.spring_portfolio.mvc.leaderboard.LeaderboardJpaRepository;
-import com.nighthawk.spring_portfolio.mvc.spacebook.Spacebook;
 import com.nighthawk.spring_portfolio.mvc.spacebook.SpacebookJpaRepository;
 import com.nighthawk.spring_portfolio.mvc.quiz.Quiz;
 import com.nighthawk.spring_portfolio.mvc.quiz.QuizJpaRepository;
